@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash Royale: Impostor Secreto</title>
+    
+    <meta name="theme-color" content="#FFD700">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Clash Impostor">
+
+    <link rel="manifest" href="manifest.json">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="inicioOverlay">
+        <img src="portada.png" alt="Pulsa para comenzar" id="imgPortada">
+    </div>
+
+    <audio id="audio" loop>
+        <source src="clashCN.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="btnMusica" onclick="toggleMusica()">🔊</button>
+
+    <h1>Clash Royale: Impostor Secreto</h1>
+    
+    <div id="contadorRonda"></div>
+
+    <div id="jugadores-container"></div>
+    
+    <div class="botones-control">
+        <button id="btnAnadir" class="btn gris" onclick="agregarJugador()">Añadir Jugador</button>
+        <button id="btnStar" class="btn rojo" onclick="iniciarJuego()">STAR</button>
+        
+        <button id="btnNuevaRonda" class="btn rojo" onclick="siguienteRonda()" style="display:none;">Nueva Ronda</button>
+        <button id="btnFinalizar" class="btn gris" onclick="finalizarJuego()" style="display:none;">Finalizar Partida</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <div id="impostor-flash" class="impostor-flash"></div>
+
+    <div id="carta-central" class="card-display"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+/* Estilos Globales y Base */
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background: url('clashft.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding: 20px;
+  color: #fff;
+  min-width: 320px;
+}
+
+/* Título de texto original con más profundidad y brillo */
+h1 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 36px;
+  color: #FFD700;
+  letter-spacing: 2px;
+  text-shadow: 
+    -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000,
+    0 0 15px rgba(255, 215, 0, 0.8);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* --- NUEVOS ESTILOS PARA LA PANTALLA DE INICIO --- */
+#inicioOverlay {
+	position:fixed; top:0; left:0; width:100%; height:100%;
+	background:rgba(0,0,0,0.95); /* Fondo oscuro se mantiene */
+    /* Quitamos color/font ya que usaremos una imagen */
+	display:flex;
+	align-items:center; justify-content:center;
+	cursor:pointer; z-index:2000;
+}
+
+#imgPortada {
+    max-width: 80%; /* Asegura que la imagen sea responsiva */
+    height: auto;
+    /* Aplica la animación de respiración */
+    animation: respirar 2s infinite alternate ease-in-out;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.7)); /* Un brillo sutil */
+}
+
+/* Definición de la animación de respiración */
+@keyframes respirar {
+    0% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+    }
+    100% { 
+        transform: scale(1.02); /* Aumenta ligeramente el tamaño */
+        filter: drop-shadow(0 0 20px rgba(255, 0, 0, 1)); /* Aumenta el brillo rojo */
+    }
+}
+/* -------------------------------------------------- */
+
+
+#contadorRonda {
+  font-size: 24px;
+  margin: 15px 0;
+  font-weight: bold;
+  color: #FFD700;
+  text-shadow: 2px 2px 4px #000;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* --- ESTILO BASE DEL INPUT (Fase de Configuración) --- */
+input[type="text"] {
+  padding: 10px;
+  margin: 5px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 3px solid #795548;
+  background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco en config */
+  color: #333;
+  max-width: 150px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+input[type="text"]:focus {
+  outline: none; 
+  border-color: #1E90FF; 
+  box-shadow: 0 0 8px rgba(30, 144, 255, 0.7);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- ESTILO COOL PARA INPUT EN FASE DE JUEGO (body.game-active) --- */
+body.game-active input[type="text"] {
+    /* Eliminar el fondo blanco y el borde */
+    background: none; 
+    border: none; 
+    
+    /* Mejorar la estética del texto */
+    font-size: 24px; 
+    font-weight: bold;
+    color: #FFD700; /* Color de oro */
+    text-shadow: 2px 2px 4px #000;
+    
+    /* Asegurar que el texto deshabilitado se vea bien */
+    opacity: 1; 
+    -webkit-text-fill-color: #FFD700; 
+}
+
+
+.btn {
+  padding: 10px 15px; 
+  font-size: 16px; 
+  margin: 5px;
+  cursor: pointer;
+  border: 3px solid #000;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 5px 8px rgba(0,0,0,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: #fff;
+  flex-shrink: 0; 
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.6);
+}
+
+.azul { background-color: #1E90FF; }
+.rojo { background-color: #FF4500; }
+.gris { background-color: #A9A9A9; color: #333; }
+
+/* ESTILOS ESPECÍFICOS DE FASE */
+#btnStar { 
+    font-size: 22px; 
+    background-color: #FFD700; 
+    color: #000; 
+    border-color: #000;
+}
+#btnFinalizar { 
+    background-color: #444; 
+    color: #fff;
+}
+
+
+/* --- CARTA: CONTENEDOR CENTRAL --- */
+.card-display {
+  background: none; 
+  backdrop-filter: none; 
+  color: #fff;
+  padding: 0; 
+  border-radius: 0; 
+  border: none; 
+  box-shadow: none; 
+  
+  font-weight: bold;
+  display:none;
+  transition: all 0.3s;
+  
+  /* TÉCNICA DE CENTRADO FINAL */
+  width: 90vw; 
+  max-width: 90%; 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -45vw; 
+  
+  transform: translateY(-50%); 
+  transform-origin: center center; 
+  
+  z-index: 5000;
+  text-align: center;
+}
+
+/* Animación POP para cartas normales (3 segundos) */
+.card-display.show {
+  display: block;
+  animation: pop-new 0.3s ease-out forwards;
+}
+
+/* Animación ZOOM para impostor (2 segundos) */
+.card-display.impostor-show {
+    display: block;
+    animation: super-zoom 2s ease-out forwards; 
+}
+
+/* Estilo del nombre del jugador en la carta */
+.card-display h2 {
+    font-size: 32px; 
+    margin-bottom: 5px;
+    color: #FFD700; 
+    text-shadow: 2px 2px 4px #000; 
+}
+
+/* Color Verde (Chartreuse) para el nombre de la carta */
+.card-display p.carta {
+    font-size: 20px; 
+    margin: 10px 0 0 0; 
+    color: #7FFF00; 
+    text-shadow: 1px 1px 3px #000; 
+}
+
+/* --- ESTILO PARA EL IMPOSTOR: ALTO CONTRASTE --- */
+.impostor {
+  color:#FF0000;
+  font-size: 45px; 
+  font-weight: 900; 
+  text-shadow: 
+    0 0 15px #FF0000,
+    0 0 5px #000;
+  margin-top: 10px; 
+}
+
+/* --- ESTILO DE LA IMAGEN --- */
+.card-display .carta-imagen {
+    max-width: 180px; 
+    max-height: 180px;
+    height: auto;
+    border-radius: 8px; 
+    border: none; 
+    box-shadow: none; 
+    margin: 10px auto;
+    display: block;
+}
+
+/* Efecto de Flash Rojo */
+.impostor-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.25); 
+    opacity: 0; 
+    z-index: 4999; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease-out; 
+}
+
+.impostor-flash.active {
+    opacity: 1; 
+}
+
+
+/* --- OTRAS ANIMACIONES --- */
+@keyframes pop-new {
+  0% { transform: scale(0.5) translateY(-50%); opacity:0; }
+  100% { transform: scale(1) translateY(-50%); opacity:1; }
+}
+
+@keyframes super-zoom {
+    0% { 
+        transform: scale(0.1) translateY(-50%); 
+        opacity:0; 
+    } 
+    50% { 
+        transform: scale(3.0) translateY(-50%); 
+        opacity:1; 
+    } 
+    100% { 
+        transform: scale(1) translateY(-50%); 
+        opacity:1; 
+    }
+}
+
+
+/* --- ESTILOS DE FASES (Control de visibilidad de botones) --- */
+.jugador-div { 
+    margin-bottom:15px; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    gap:5px; 
+}
+
+/* OCULTAR Botón Ver Carta en Configuración */
+.jugador-div .btn.azul {
+    display: none; 
+}
+
+/* MOSTRAR Botón Ver Carta cuando el juego está activo */
+body.game-active .jugador-div .btn.azul {
+    display: inline-block;
+}
+
+/* OCULTAR Botón Eliminar cuando el juego está activo */
+body.game-active .jugador-div button.eliminar {
+    display: none; 
+}
+
+.jugador-div button.eliminar {
+	background:none;
+	border:none;
+	color: #FF6347;
+	font-weight:bold;
+	font-size: 24px;
+	cursor:pointer;
+	flex-shrink: 0;
+}
+
+.botones-control { margin:15px 0; }
+
+#resultado p {
+	font-size: 18px;
+	font-weight: bold;
+	color: #FFF;
+	background: rgba(0, 0, 0, 0.6);
+	padding: 5px 10px;
+	border-radius: 5px;
+	display: inline-block;
+}
+
+#btnMusica {
+	position: fixed; top:10px; left:10px; z-index:2001;
+	background:none;
+	font-size:28px;
+	border:none;
+	cursor:pointer;
+	color: #fff;
+	padding: 5px;
+}
+.musica-off {
+	color: #FF6347;
+}
+
+/* Media Query para Responsividad (Móviles) */
+@media (max-width: 600px) {
+    .jugador-div {
+        flex-wrap: wrap; 
+        gap: 10px;
+    }
+    .jugador-div input {
+        width: 100%;
+        max-width: none;
+        order: 1; 
+    }
+    .jugador-div .btn.azul {
+        width: 70%;
+        order: 2; 
+    }
+    .jugador-div button.eliminar {
+        width: 15%;
+        order: 3; 
+    }
+    .botones-control button {
+        width: 45%; 
+    }
+    .card-display .carta-imagen {
+      max-width: 150px; 
+      max-height: 150px;
+    }
+    .card-display h2 {
+      font-size: 28px;
+    }
+    .card-display p.carta {
+      font-size: 18px;
+    }
+    .impostor {
+      font-size: 36px;
+    }
+    .card-display {
+      margin-left: -45vw;
+    }
+}
